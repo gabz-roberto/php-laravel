@@ -13,6 +13,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Rotas que serão chamadas quando as URL's inseridas forem acessadas
+
+/**
+ * FUNCIONAMENTO
+ * Route::verboHttp('uri', funcao_callback)
+ * 
+ * A callback será chamada quando a URI for acessada
+ */
+
+// Route::get('/', function () {
+//     return 'hello world';
+// });
+
+Route::get('/', [\App\Http\Controllers\MainController::class,'principal']);
+// Para utilizar um controller, os parâmetros são ('rota', caminho::class,'nomeDaAction')
+
+Route::get('/about', function() {
+    return 'about us';
 });
+
+Route::get('/contact', function() {
+    return 'contact';
+});
+
+/**
+ * VERBOS HTTP
+ * get
+ * post
+ * put
+ * patch
+ * delete
+ * options
+ */
