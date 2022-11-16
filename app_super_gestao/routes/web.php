@@ -29,13 +29,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\MainController::class,'principal']);
 // Para utilizar um controller, os parâmetros são ('rota', caminho::class,'nomeDaAction')
 
-Route::get('/about', function() {
-    return 'about us';
-});
+Route::get('/about', [\App\Http\Controllers\AboutController::class,'sobre']);
 
-Route::get('/contact', function() {
-    return 'contact';
-});
+Route::get('/contact', [\App\Http\Controllers\ContactController::class,'contato']);
 
 /**
  * VERBOS HTTP
