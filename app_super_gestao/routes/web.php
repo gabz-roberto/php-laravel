@@ -32,7 +32,13 @@ Route::get('/', [\App\Http\Controllers\MainController::class,'principal']);
 Route::get('/about', [\App\Http\Controllers\AboutController::class,'sobre']);
 
 Route::get('/contact', [\App\Http\Controllers\ContactController::class,'contato']);
+// nome, categoria, assunto, mensagem
 
+// Os params serão enviados em sequência e recebidos na callback na mesma sequência
+// Sendo assim, não importa o nome dos parâmetros recebidos na função
+Route::get('/contact/{nome}/{categoria}/{assunto}/{mensagem}', function(string $nome, string $categoria, string $assunto, string $mensagem) {
+    echo "ROTA: $nome - $categoria - $assunto - $mensagem";
+});
 /**
  * VERBOS HTTP
  * get
