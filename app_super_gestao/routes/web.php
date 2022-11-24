@@ -36,9 +36,16 @@ Route::get('/contact', [\App\Http\Controllers\ContactController::class,'contato'
 
 // Os params serão enviados em sequência e recebidos na callback na mesma sequência
 // Sendo assim, não importa o nome dos parâmetros recebidos na função
-Route::get('/contact/{nome}/{categoria}/{assunto}/{mensagem}', function(string $nome, string $categoria, string $assunto, string $mensagem) {
-    echo "ROTA: $nome - $categoria - $assunto - $mensagem";
-});
+/**                                                              Params opcionais terminam com ?
+ * Route::get(/nomeDaRota/{paramObrigatorio}/{paramObrigatorio}/{paramOpcional?}/{paramOpcional?})
+ * Na callback, são definidos parâmetros padrão par os argumentos opcionais
+ * 
+ * Parâmetros opcionais são passados da direita pra esquerda, para evitar erros de falta de argumentos
+ */
+Route::get('/contact/{nome}/{categoria_id}', 
+    function(string $nome, int $categoria_id = 1) {
+    echo "ROTA: $nome - $categoria_id";
+})->where('categoria_id','[0-9]+');
 /**
  * VERBOS HTTP
  * get
