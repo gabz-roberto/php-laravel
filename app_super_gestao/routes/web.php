@@ -32,26 +32,37 @@ Route::get('/', [\App\Http\Controllers\MainController::class,'principal']);
 Route::get('/about', [\App\Http\Controllers\AboutController::class,'sobre']);
 
 Route::get('/contact', [\App\Http\Controllers\ContactController::class,'contato']);
-// nome, categoria, assunto, mensagem
 
-// Os params serão enviados em sequência e recebidos na callback na mesma sequência
-// Sendo assim, não importa o nome dos parâmetros recebidos na função
-/**                                                              Params opcionais terminam com ?
- * Route::get(/nomeDaRota/{paramObrigatorio}/{paramObrigatorio}/{paramOpcional?}/{paramOpcional?})
- * Na callback, são definidos parâmetros padrão par os argumentos opcionais
- * 
- * Parâmetros opcionais são passados da direita pra esquerda, para evitar erros de falta de argumentos
- */
-Route::get('/contact/{nome}/{categoria_id}', 
-    function(string $nome, int $categoria_id = 1) {
-    echo "ROTA: $nome - $categoria_id";
-})->where('categoria_id','[0-9]+');
-/**
- * VERBOS HTTP
- * get
- * post
- * put
- * patch
- * delete
- * options
- */
+Route::get('/login', function() { return 'Login'; });
+Route::get('/clients', function() { return 'Clients'; });
+Route::get('/suppliers', function() { return 'Fornecedores'; });
+Route::get('/products', function() { return 'Produtos'; });
+
+
+
+
+
+
+
+// // Os params serão enviados em sequência e recebidos na callback na mesma sequência
+// // Sendo assim, não importa o nome dos parâmetros recebidos na função
+// /**                                                              Params opcionais terminam com ?
+//  * Route::get(/nomeDaRota/{paramObrigatorio}/{paramObrigatorio}/{paramOpcional?}/{paramOpcional?})
+//  * Na callback, são definidos parâmetros padrão par os argumentos opcionais
+//  * 
+//  * Parâmetros opcionais são passados da direita pra esquerda, para evitar erros de falta de argumentos
+//  */
+// Route::get('/contact/{nome}/{categoria_id}', function(string $nome, int $categoria_id = 1) {
+//     echo "ROTA: $nome - $categoria_id";
+// })->where('categoria_id','[0-9]+')->where('nome', '[A-Za-z]+'); 
+// // Utilizando uma regex para aceitar somente números no param de nome categoria_id
+// // Da mesma forma, no param nome, que aceita somente caracteres de 'A' a 'Z' ou 'a' a 'z'
+// /**
+//  * VERBOS HTTP
+//  * get
+//  * post
+//  * put
+//  * patch
+//  * delete
+//  * options
+//  */
