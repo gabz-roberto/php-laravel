@@ -1,12 +1,13 @@
 <h3>Início (view)</h3>
 <ul>
     <li>
-        <a href="/">Home</a>
+        <a href="{{ route('site.index') }}">Home</a>
+        <!--utilizando o helper route-->
     </li>
     <li>
-        <a href="/about">Sobre nós</a>
+        <a href="{{ route('site.sobrenos') }}">Sobre nós</a>
     </li>
     <li>
-        <a href="/contact">Contato</a>
+        <a href="{{ route('site.contato') }}">Contato</a>
     </li>
 </ul>

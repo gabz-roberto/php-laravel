@@ -26,21 +26,39 @@ use Illuminate\Support\Facades\Route;
 //     return 'hello world';
 // });
 
-Route::get('/', [\App\Http\Controllers\MainController::class,'principal']);
+Route::get('/', [\App\Http\Controllers\MainController::class,'principal'])->name('site.index');
 // Para utilizar um controller, os parâmetros são ('rota', caminho::class,'nomeDaAction')
 
-Route::get('/about', [\App\Http\Controllers\AboutController::class,'sobre']);
+Route::get('/about', [\App\Http\Controllers\AboutController::class,'sobre'])->name('site.sobrenos');
+// A função ->name('') especifica um alias para a rota, fazendo que não tenha uma dependência direta da url
 
-Route::get('/contact', [\App\Http\Controllers\ContactController::class,'contato']);
+Route::get('/contact', [\App\Http\Controllers\ContactController::class,'contato'])->name('site.contato');
+Route::get('/login', function() { return 'Login'; })->name('site.login');
 
-Route::get('/login', function() { return 'Login'; });
-Route::get('/clients', function() { return 'Clients'; });
-Route::get('/suppliers', function() { return 'Fornecedores'; });
-Route::get('/products', function() { return 'Produtos'; });
+// Agrupando as rotas e utilizano um prefixo, dessa forma, as rotas serão acessadas através de /app/nomeDaRota
+Route::prefix('/app')->group(function() {
+    Route::get('/clients', function() { return 'Clients'; })->name('app.clientes');
+    Route::get('/suppliers', function() { return 'Fornecedores'; })->name('app.fornecedores');
+    Route::get('/products', function() { return 'Produtos'; })->name('app.produtos');
+});
 
 
+Route::get("/rota1", function() { echo 'Rota 1'; })->name('site.rota1');
 
+// Redirencionamento direto pela função
+// redirect()->route('nomeDaRotaDestino');
+Route::get("/rota2", function() { 
+    return redirect()->route('site.rota1');
+ })->name('site.rota2');
 
+// Redirecionamento de rotas -> redirencionando para outra rota
+// Route::redirect('/rota2', '/rota1');
+// Route::redirect('/rotaDeOrigem', '/rotaDeDestino');
+
+// Criando uma rota fallback para URL's não mapeada
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="/">Clique aqui para ir para a página inicial.</a>'
+})
 
 
 
