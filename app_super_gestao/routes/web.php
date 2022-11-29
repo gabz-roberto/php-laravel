@@ -43,24 +43,25 @@ Route::prefix('/app')->group(function() {
 });
 
 
-Route::get("/rota1", function() { echo 'Rota 1'; })->name('site.rota1');
+Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class,'teste'])->name('teste');
+
+
+// Criando uma rota fallback para URL's não mapeada
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="'.route('site.index').'">Clique aqui para ir para a página inicial.</a>';
+});
+
+// Route::get("/rota1", function() { echo 'Rota 1'; })->name('site.rota1');
 
 // Redirencionamento direto pela função
 // redirect()->route('nomeDaRotaDestino');
-Route::get("/rota2", function() { 
-    return redirect()->route('site.rota1');
- })->name('site.rota2');
+// Route::get("/rota2", function() { 
+//     return redirect()->route('site.rota1');
+//  })->name('site.rota2');
 
 // Redirecionamento de rotas -> redirencionando para outra rota
 // Route::redirect('/rota2', '/rota1');
 // Route::redirect('/rotaDeOrigem', '/rotaDeDestino');
-
-// Criando uma rota fallback para URL's não mapeada
-Route::fallback(function() {
-    echo 'A rota acessada não existe. <a href="/">Clique aqui para ir para a página inicial.</a>'
-})
-
-
 
 // // Os params serão enviados em sequência e recebidos na callback na mesma sequência
 // // Sendo assim, não importa o nome dos parâmetros recebidos na função
