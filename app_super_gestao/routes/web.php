@@ -38,12 +38,13 @@ Route::get('/login', function() { return 'Login'; })->name('site.login');
 // Agrupando as rotas e utilizano um prefixo, dessa forma, as rotas serão acessadas através de /app/nomeDaRota
 Route::prefix('/app')->group(function() {
     Route::get('/clients', function() { return 'Clients'; })->name('app.clientes');
-    Route::get('/suppliers', function() { return 'Fornecedores'; })->name('app.fornecedores');
+    Route::get('/suppliers', [\App\Http\Controllers\SuppliersController::class, 'index'])->name('app.fornecedores');
     Route::get('/products', function() { return 'Produtos'; })->name('app.produtos');
 });
 
 
 Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class,'teste'])->name('teste');
+// Os params serão enviados através da URL, serão recebidos pelo controller correspondente
 
 
 // Criando uma rota fallback para URL's não mapeada

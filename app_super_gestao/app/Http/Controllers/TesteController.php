@@ -12,6 +12,11 @@ class TesteController extends Controller
         // A variável está sendo passada para a view como um array, contendo o atributo x
         // Por convenção, os atributos são passados com o mesmo nome das variáveis
 
-        return view('site.teste', compact('param1', 'param2'));
+        // return view('site.teste', compact('param1', 'param2'));
+        // Ao utilizar o compact() os nomes dos parâmetros são passados como string e serão execultados na ordem
+
+
+        return view('site.teste')->with('param1', $param1)->with('param2', $param2);
+        // with('nomeDaVariavelNoLadoDaView', 'valor')
     }
 }
